@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import useCart from "../../Hooks/useCart";
 import { FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const MyCart = () => {
   const [cart,refetch] = useCart();
@@ -44,7 +45,9 @@ const MyCart = () => {
       <div className="uppercase font-semibold flex justify-evenly h-[60px] items-center">
         <h3 className="text-3x">Total Item : {cart.length}</h3>
         <h3 className="text-3x">Total Price : ${total}</h3>
-        <button className="btn btn-warning btn-sm">pay</button>
+        <Link to='/dashboard/payment'>
+          <button className="btn btn-warning btn-sm">pay</button>
+        </Link>
       </div>
       <div className="overflow-x-auto w-full">
         <table className="table w-full">
@@ -77,7 +80,12 @@ const MyCart = () => {
                 <td>{item?.name}</td>
                 <td className="text-end">$ {item?.price}</td>
                 <th>
-                  <button onClick={()=>deleteHandler(item)} className="btn btn-ghost btn-xs bg-red-600 btn-sm text-white"><FaTrashAlt/></button>
+                  <button
+                    onClick={() => deleteHandler(item)}
+                    className="btn btn-ghost btn-xs bg-red-600 btn-sm text-white"
+                  >
+                    <FaTrashAlt />
+                  </button>
                 </th>
               </tr>
             ))}
